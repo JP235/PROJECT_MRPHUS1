@@ -1,17 +1,10 @@
-/**
- * @Author: carlosgilgonzalez
- * @Date:   2018-04-12T18:36:07+02:00
- * @Last modified by:   carlosgilgonzalez
- * @Last modified time: 2018-05-08T17:21:03+02:00
- */
-
-
 
 /******************************************************************************
 Analog Test
 ******************************************************************************/
 /*
-Here goes  the libraries
+Here goes  the librariesaaa
+a
 a*/
 
 /*

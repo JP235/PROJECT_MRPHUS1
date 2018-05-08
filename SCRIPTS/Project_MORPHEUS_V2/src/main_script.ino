@@ -2,7 +2,7 @@
  * @Author: carlosgilgonzalez
  * @Date:   2018-05-09T01:35:49+02:00
  * @Last modified by:   carlosgilgonzalez
- * @Last modified time: 2018-05-09T01:58:24+02:00
+ * @Last modified time: 2018-05-09T19:02:48+02:00
  */
 
 
@@ -49,7 +49,7 @@ int minutes = 0;
 //const byte secs= seconds;
 //const byte hours = 0;
 int hours = 0;
-
+int counter = 0;
 /* Change these values to set the current initial date */
 const byte day = 25;
 const byte month = 9;
@@ -58,6 +58,7 @@ const byte year = 15;
 int hour_time = 0;
 int hourval = 0;
 int minuteval = 0;
+int secondval = 0;
 
 int set_Timer = 0;
 
@@ -89,9 +90,14 @@ void loop() {
         Serial.print(hourval);
         minuteval = Serial1.parseInt();
         Serial.print(":");
-        Serial.println(minuteval);
+        Serial.print(minuteval);
+        secondval = Serial1.parseInt();
+        Serial.print(":");
+        Serial.println(secondval);
+
         const byte minutes = minuteval;
         const byte hours = hourval;
+        const byte seconds = secondval;
         rtc.setTime(hourval, minuteval, seconds);
         rtc.setDate(day, month, year);
 
@@ -149,18 +155,25 @@ void loop() {
     }
 
   }
+
   //Serial1.println(val);
   //Wait for a bit to keep serial data from saturating
-  if (set_Timer == 1) {
+  if (set_Timer == 1 & counter == 100) {
   print2digits(rtc.getHours());
   Serial.print(":");
   print2digits(rtc.getMinutes());
   Serial.print(":");
   print2digits(rtc.getSeconds());
 
-  Serial.println();}
+  Serial.println();
+  counter = 0;}
 
-  delay(1000);
+  if (set_Timer == 1 & counter < 100) {
+  counter += 1;
+  //Serial.println(counter);
+  Serial1.println(val);
+}
+  delay(10);
   //delay(10);
 }
 void alarmMatch()

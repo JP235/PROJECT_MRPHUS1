@@ -15,7 +15,7 @@ void setup() {
 
 }
 
-void loop() {
+void loop() {a
 
 
 
@@ -42,6 +42,7 @@ void loop() {
 
   // send the value of analog input 0:
   int val = analogRead(A2);
+  int val2 = analogRead(A1);
   int val2 = analogRead(A1);
   //Serial.print(val);
   //Serial.print(",");

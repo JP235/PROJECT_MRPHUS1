@@ -1,10 +1,19 @@
+/**
+ * @Author: carlosgilgonzalez
+ * @Date:   2018-04-12T18:35:33+02:00
+ * @Last modified by:   carlosgilgonzalez
+ * @Last modified time: 2018-05-08T16:03:53+02:00
+ */
+
+
+
 /******************************************************************************
 Project Morpheus One:
 -Sensors:
   * Myoware Muscle Sensor
   * Electret Michropone BOB 12758
 -Timer:
-  * RTC DS1307
+  * RTC DS1307¿?
 - Bluetooth:
   * HC05
 

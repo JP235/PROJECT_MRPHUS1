@@ -2,7 +2,7 @@
  * @Author: carlosgilgonzalez
  * @Date:   2018-05-09T01:35:49+02:00
  * @Last modified by:   carlosgilgonzalez
- * @Last modified time: 2018-05-09T19:02:48+02:00
+ * @Last modified time: 2018-05-09T20:18:21+02:00
  */
 
 
@@ -38,6 +38,9 @@ void loop() {aa
 
 #include <RTCZero.h>
 
+
+
+
 /* Create an rtc object */
 RTCZero rtc;
 
@@ -61,6 +64,15 @@ int minuteval = 0;
 int secondval = 0;
 
 int set_Timer = 0;
+
+
+// FILTER SET UP
+
+// filters out changes faster that 5 Hz.
+
+
+// create a one pole (RC) lowpass filter
+
 
 void setup() {
   // initialize the serial communication:

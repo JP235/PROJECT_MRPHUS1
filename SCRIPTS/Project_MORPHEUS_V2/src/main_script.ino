@@ -2,11 +2,7 @@
  * @Author: carlosgilgonzalez
  * @Date:   2018-05-09T01:35:49+02:00
  * @Last modified by:   carlosgilgonzalez
-<<<<<<< HEAD
- * @Last modified time: 2018-05-14T13:13:25+02:00
-=======
  * @Last modified time: 2018-05-10T22:32:26+02:00
->>>>>>> 1c16699799cc562e84bab2b92794660113c39658
 >>>>>>> bd7540a9a6faafdc8474ede7c55270f740577527
  */
 
@@ -69,8 +65,13 @@ int minuteval = 0;
 int secondval = 0;
 
 int set_Timer = 0;
+int pastTime = 0;
 
-
+int REMoNoREM = 0;
+int bufferLenght = 101;
+int REMbuffer[bufferLenght];
+              
+              
 // FILTER SET UP
 
 // filters out changes faster that 5 Hz.
@@ -81,8 +82,8 @@ int set_Timer = 0;
 
 void setup() {
   // initialize the serial communication:
-  Serial.begin(9600);
-  Serial1.begin(9600);
+  Serial.begin(9600); //USB
+  Serial1.begin(9600); //Bluetooth
   Serial.println("Ready");
 
 
@@ -93,7 +94,12 @@ void setup() {
 }
 
 void loop() {
-
+  
+  if (pastTime == 1 & REMoNoREM ==0 ){
+    Serial.println("Alarm Match!"); 
+    Serial1.println(1);
+  }
+  
   if (set_Timer == 0) {
     if(Serial1.available()>=1){
       char entrada = Serial1.read(); //Leer un caracter
@@ -118,23 +124,33 @@ void loop() {
         rtc.setTime(hourval, minuteval, seconds);
         rtc.setDate(day, month, year);
 
-        rtc.setAlarmTime(1, 3, 10);
+        //rtc.setAlarmTime(1, 3, 10);
         rtc.enableAlarm(rtc.MATCH_HHMMSS);
 
+        
         rtc.attachInterrupt(alarmMatch);
         set_Timer = 1;
+        
       }
     }
   }
 
   // send the value of analog input 0:
-  int val = analogRead(A2);
-  int val2 = analogRead(A1);
+  int val = analogRead(A2);    //Micro
+  int val2 = analogRead(A1);   //EOG
   //int val2 = analogRead(A1);
   //Serial.print(val);
   //Serial.print(",");
   //Serial.println(val2);
-
+  
+  REMbuffer[counter] = val2;
+  if REMbuffer.getAverge() >= 500{
+    REMoNoREM = 1;
+  }  
+  else{
+    REMoNoREM = 0;
+  }
+  
   if(Serial1.available()>=1){
     char entrada = Serial1.read(); //Leer un caracter
 
@@ -185,7 +201,7 @@ void loop() {
   Serial.println();
   counter = 0;}
 
-  if (set_Timer == 1 & counter < 100) {
+  if (set_Timer == 1 & counter < 100 ) {
   counter += 1;
   //Serial.println(counter);
   Serial1.println(val);
@@ -195,8 +211,9 @@ void loop() {
 }
 void alarmMatch()
 {
-  Serial.println("Alarm Match!");
-  Serial1.println(1);
+  pastTime = 1
+  
+  
 }
 void print2digits(int number) {
   if (number < 10) {
@@ -205,4 +222,10 @@ void print2digits(int number) {
   Serial.print(number);
 }
 
-// hellO jp
+
+
+
+
+
+
+
